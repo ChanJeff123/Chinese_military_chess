@@ -6,25 +6,17 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 先安装树莓派3B+的SPI接口支持库
 ------------------------------
 事前update树莓派的库
-
 >sudo apt-get update && sudo apt-get upgrade
 
 这里的支持库分别是“Py-spidev”和“SPI-Py”，安装“Py-spidev”可以使用命令来安装：
-
->sudo apt-get install python-spidev
-
+>sudo apt-get install python-spidev  
 >python3-spidev
 
 这样“Py-spidev”就可以同时支持Python 2和Python 3了。虽然使用“py-spidev”可以驱动Python中的SPI接口，但是项目中我们使用了“SPI-Py”，可以通过以下命令来完成安装“SPI-Py”:
-
->cd ~
-
->git clone https://github.com/lthiery/SPI-Py.git
-
->cd SPI-Py
-
->sudo python setup.py install
-
+>cd ~  
+>git clone https://github.com/lthiery/SPI-Py.git  
+>cd SPI-Py  
+>sudo python setup.py install  
 >sudo python3 setup.py install
 
 同样的“SPI-Py”也可以同时支持Python2和Python3了。
@@ -38,12 +30,9 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 
 实现过程
 ----
-下载好代码放在同一目录下
-
-需要定制50个含IC芯片的军棋
-
-对每个芯片卡写处理:
-
+下载好代码放在同一目录下  
+需要定制50个含IC芯片的军棋  
+对每个芯片卡写处理:  
 | 写入 | 代表 | 写入 | 代表 |
 | :------: | :------: | :------: | :------: |
 | 1 | 红方司令 | 13 | 黄方司令 |
@@ -65,4 +54,4 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 >sudo python ezRead.py
 
 然后就可以直接上核心代码啦！
->sudo python repeatV5.py
+>sudo python repeatV5.py  
