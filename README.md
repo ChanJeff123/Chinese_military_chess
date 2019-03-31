@@ -31,6 +31,8 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 
 硬件接线图
 ----
+红LED接board板 11引脚 黄LED接13号引脚图中没给出，要自己接。接地可以看GND引脚
+>gpio readall
 ![raspi](https://cdn.raspberrytips.nl/wp-content/uploads/2016/08/RFID-RC522-raspberry-pi-3-600x301.png)
 
 实现过程
