@@ -30,7 +30,8 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 
 实现过程
 ----
-git clone https://github.com/ChanJeff123/Chinese_military_chess.git
+>git clone https://github.com/ChanJeff123/Chinese_military_chess.git
+
 下载好代码放在同一目录下  
 把music文件夹里的MP3文件放在/home/pi/music/文件夹下  
 需要定制50个含IC芯片的军棋  
