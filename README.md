@@ -60,5 +60,5 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 然后就可以直接上核心代码啦！
 >sudo python repeatV5.py
 
-Any question connect me.
+Any question connect me.  
 ccwanyuan2014@163.com
