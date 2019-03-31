@@ -31,6 +31,7 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 实现过程
 ----
 下载好代码放在同一目录下  
+把music文件夹里的MP3文件放在/home/pi/music/文件夹下  
 需要定制50个含IC芯片的军棋  
 对每个芯片卡写处理:  
 | 写入 | 代表 | 写入 | 代表 |
@@ -54,4 +55,4 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 >sudo python ezRead.py
 
 然后就可以直接上核心代码啦！
->sudo python repeatV5.py  
+>sudo python repeatV5.py
