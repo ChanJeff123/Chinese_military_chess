@@ -45,7 +45,7 @@ def type_print(t):
         print("yellow side win!黄方胜")
     if t==rw:
         print("red side win!红方胜")
-    if t==all_out
+    if t==all_out:
         print("双方出局 all out!")
     if t==error:
         print("error!wrong operation")
