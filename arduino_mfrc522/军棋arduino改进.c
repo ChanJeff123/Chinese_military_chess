@@ -113,6 +113,8 @@ const int NRSTPD = 5;
 //4 bytes Serial number of card, the 5 bytes is verfiy bytes
 uchar serNum[5];
 
+int red_w = 3;
+int yellow_w = 4;
 void setup()
 {
   Serial.begin(57600);
@@ -121,6 +123,10 @@ void setup()
   digitalWrite(chipSelectPin, LOW); // Activate the RFID reader
   pinMode(NRSTPD, OUTPUT); // Set digital pin 5 , Not Reset and Power-down
   MFRC522_Init();
+  pinMode(red_w, OUTPUT);
+  digitalWrite(red_w, LOW);
+  pinMode(yellow_w, OUTPUT);
+  digitalWrite(yellow_w, LOW);
 }
 
 void loop()
@@ -298,7 +304,96 @@ void loop()
       Serial.println("Hello unkown guy!");
     }
   }
-  if a > 12
+  void b1_win(){
+      Serial.println("red side win");
+      digitalWrite(red_w, HIGH);
+      delay(1000);
+  }
+  void b2_win(){
+      Serial.println("yellow side win");
+      digitalWrite(yellow_w, HIGH);
+      delay(1000);
+  }
+  void no_win(){
+      Serial.println("all out");
+      digitalWrite(yellow_w, HIGH);
+      digitalWrite(red_w, HIGH);
+      delay(1000);
+  }
+  void end_rwin(){
+      Serial.println("game over redside win");
+      digitalWrite(red_w, HIGH);
+      delay(400);
+      digitalWrite(red_w, LOW);
+      delay(400);
+      digitalWrite(red_w, HIGH);
+      delay(400);
+      digitalWrite(red_w, LOW);
+      delay(400);
+      digitalWrite(red_w, HIGH);
+      delay(400);
+      digitalWrite(red_w, LOW);
+  }
+  void end_ywin(){
+      Serial.println("game over yellowside win");
+      digitalWrite(yellow_w, HIGH);
+      delay(400);
+      digitalWrite(yellow_w, LOW);
+      delay(400);
+      digitalWrite(yellow_w, HIGH);
+      delay(400);
+      digitalWrite(yellow_w, LOW);
+      delay(400);
+      digitalWrite(yellow_w, HIGH);
+      delay(400);
+      digitalWrite(yellow_w, LOW);
+  }
+  void ERROR_GAME(){
+      Serial.println("game ERROR!!");
+  }
+    if (a > 12){  //yellow side
+      int b1 = a-12;
+    }else if (a<=12){  //red side
+      int b2 =a;
+    }
+    else
+    {
+        ERROR_GAME();
+    }
+
+    //比較大小，普通的情况
+    if (b1<10 && b2<10 && b1<b2){
+        b1_win();
+    } else if (b1<10 && b2<10 && b1>b2){
+        b2_win();
+    }else if (b1<10 && b2<10 && b1 == b2){
+        no_win();
+    //吃掉军棋的情况
+    }else if (b1 == 12){
+        end_ywin();
+    }else if (b2 == 12){
+        end_rwin();
+    //炸弹的情况
+    }else if (b1 == 11 || b2 == 11){
+        no_win();
+    //地雷的情况
+    }else if (b1 == 10){
+        if (b2 == 9){
+            b2_win();
+        }else if (b2 == 11){
+            no_win();
+        }else {
+            b1_win();
+        }
+    }else if (b2 == 10){
+        if (b1 == 9){
+            b1_win();
+        }else if (b1 == 11){
+            no_win();
+        }else {
+            b2_win();
+        }
+
   MFRC522_Halt(); //command the card into sleep mode
   delay(200);
 }
