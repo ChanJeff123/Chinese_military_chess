@@ -646,197 +646,199 @@ void loop()
       Serial.println("yellow siling");
       int a = 13;
       delay(2000);
-
+      return a;
     } else if (id[0] == 0x8C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) {
       Serial.println("yellow junzhang");
       int a = 14;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x7C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xAC &&  id[1] ==  0x1B &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow shizhang");
       int a = 15;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x9C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0x3C &&  id[1] ==  0xFF &&  id[2] ==  0x2E &&  id[3] ==  0x2)) {
       Serial.println("yellow lvzhang");
       int a = 16;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0xBC && id[1] == 0x3 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xCC &&  id[1] ==  0x3 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow tuanzhang");
       int a = 17;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x4C && id[1] == 0xA && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xAC &&  id[1] ==  0x2 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow yinzhang");
       int a = 18;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x6C && id[1] == 0xF && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xAC &&  id[1] ==  0xB &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0xBC &&  id[1] ==  0x2 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow lianzhang");
       int a = 19;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0xFC && id[1] == 0x22 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0x1C &&  id[1] ==  0x8 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0xC2 &&  id[1] ==  0x3 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow paizhang");
       int a = 20;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x9C && id[1] == 0xB && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xEC &&  id[1] ==  0x12 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0x8C &&  id[1] ==  0x2E &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow gongbing");
       int a = 21;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x4C && id[1] == 0xFB && id[2] == 0x2E && id[3] == 0x2) \
                || (id[0] ==  0xBC &&  id[1] ==  0x5 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0xC1 &&  id[1] ==  0x4 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("yellow dilei");
       int a = 22;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x8C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) \
                || (id[0] ==  0x9C &&  id[1] ==  0xF3 &&  id[2] ==  0x2E &&  id[3] ==  0x2)) {
       Serial.println("yellow zhadang");
       int a = 23;
       delay(2000);
-
+      return a;
     } else if (id[0] == 0x3C && id[1] == 0x1A && id[2] == 0x2F && id[3] == 0x2) {
       Serial.println("yellow junqi");
       int a = 24;
       delay(2000);
-
+      return a;
       //红方
     } else if (id[0] == 0x9C && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
       Serial.println("red siling");
       int a = 1;
       delay(2000);
-
+      return a;
     } else if (id[0] == 0x5C && id[1] == 0x0E && id[2] == 0x2F && id[3] == 0x2) {
       Serial.println("red junzhang");
       int a = 2;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x3C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) \
                || (id[0] ==  0xAC &&  id[1] ==  0xF6 &&  id[2] ==  0x2E &&  id[3] ==  0x2)) {
       Serial.println("red shizhang");
       int a = 3;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x9C && id[1] == 0x20 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0x8C &&  id[1] ==  0x20 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red lvzhang");
       int a = 4;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x9C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) \
                || (id[0] ==  0xCC &&  id[1] ==  0xF8 &&  id[2] ==  0x2E &&  id[3] ==  0x2)) {
       Serial.println("red tuanzhang");
       int a = 5;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0xFC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xC1 &&  id[1] ==  0x7 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red yinzhang");
       int a = 6;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0xEC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0x9C &&  id[1] ==  0x11 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0x1C &&  id[1] ==  0x2E &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red lianzhang");
       int a = 7;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x2C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) \
                || (id[0] ==  0xFC &&  id[1] ==  0x18 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0x6C &&  id[1] ==  0x1E &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red paizhang");
       int a = 8;
       delay(2000);
-
+      return a;
     } else if ( (id[0] == 0x4C && id[1] == 0x29 && id[2] == 0x2F && id[3] == 0x2) \
                 || (id[0] ==  0xCF &&  id[1] ==  0xA &&  id[2] ==  0x2E &&  id[3] ==  0x2) \
                 || (id[0] ==  0x7C &&  id[1] ==  0x10 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red gongbing");
       int a = 9;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x3C && id[1] == 0x27 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xEC &&  id[1] ==  0x6 &&  id[2] ==  0x2F &&  id[3] ==  0x2) \
                || (id[0] ==  0x4C &&  id[1] ==  0x1 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red dilei");
       int a = 10;
       delay(2000);
-
+      return a;
     } else if ((id[0] == 0x5C && id[1] == 0x01 && id[2] == 0x2F && id[3] == 0x2) \
                || (id[0] ==  0xAC &&  id[1] ==  0x21 &&  id[2] ==  0x2F &&  id[3] ==  0x2)) {
       Serial.println("red zhadang");
       int a = 11;
       delay(2000);
-
+      return a;
     } else if (id[0] == 0x4C && id[1] == 0xF4 && id[2] == 0x2E && id[3] == 0x2) {
       Serial.println("red junqi");
       int a = 12;
       delay(2000);
-
+      return a;
     } else {
       Serial.println("Hello unkown guy!");
     }
   }
-
-  if (a > 12) { //yellow side
-    int b1 = a - 12;
-  } else if (a <= 12) { //red side
-    int b2 = a;
-  }
-  else
-  {
-    ERROR_GAME();
-  }
-
-  //比較大小，普通的情况
-  if (b1 < 10 && b2 < 10 && b1 < b2) {
-    b1_win();
-  } else if (b1 < 10 && b2 < 10 && b1 > b2) {
-    b2_win();
-  } else if (b1 < 10 && b2 < 10 && b1 == b2) {
-    no_win();
-    //吃掉军棋的情况
-  } else if (b1 == 12) {
-    end_ywin();
-  } else if (b2 == 12) {
-    end_rwin();
-    //炸弹的情况
-  } else if (b1 == 11 || b2 == 11) {
-    no_win();
-    //地雷的情况
-  } else if (b1 == 10) {
-    if (b2 == 9) {
-      b2_win();
-    } else if (b2 == 11) {
-      no_win();
-    } else {
-      b1_win();
+  int a, b1, b2;
+  while (a != 0) {
+    if (a > 12) { //yellow side
+      int b1 = a - 12;
+    } else if (a <= 12) { //red side
+      int b2 = a;
     }
-  } else if (b2 == 10) {
-    if (b1 == 9) {
-      b1_win();
-    } else if (b1 == 11) {
-      no_win();
-    } else {
-      b2_win();
+    else
+    {
+      ERROR_GAME();
     }
 
+    //比較大小，普通的情况
+    if (b1 < 10 && b2 < 10 && b1 < b2) {
+      b1_win();
+    } else if (b1 < 10 && b2 < 10 && b1 > b2) {
+      b2_win();
+    } else if (b1 < 10 && b2 < 10 && b1 == b2) {
+      no_win();
+      //吃掉军棋的情况
+    } else if (b1 == 12) {
+      end_ywin();
+    } else if (b2 == 12) {
+      end_rwin();
+      //炸弹的情况
+    } else if (b1 == 11 || b2 == 11) {
+      no_win();
+      //地雷的情况
+    } else if (b1 == 10) {
+      if (b2 == 9) {
+        b2_win();
+      } else if (b2 == 11) {
+        no_win();
+      } else {
+        b1_win();
+      }
+    } else if (b2 == 10) {
+      if (b1 == 9) {
+        b1_win();
+      } else if (b1 == 11) {
+        no_win();
+      } else {
+        b2_win();
+      }
+    }
     MFRC522_Halt(); //command the card into sleep mode
     delay(200);
   }
+}
