@@ -25,6 +25,52 @@ void setup() {
   Serial.println();
 }
 
+void(* resetFunc) (void) = 0; //制造重启命令
+
+// int SCAN_ytags(int b1)
+// {
+//   // Look for new cards
+//   if ( ! mfrc522.PICC_IsNewCardPresent())
+//   {
+//     return;
+//   }
+//   // Select one of the cards
+//   if ( ! mfrc522.PICC_ReadCardSerial())
+//   {
+//     return;
+//   }
+//   //Show UID on serial monitor
+//   Serial.print("UID tag :");
+//   String content = "";
+//   byte letter;
+//   for (byte i = 0; i < mfrc522.uid.size; i++)
+//   {
+//     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+//     Serial.print(mfrc522.uid.uidByte[i], HEX);
+//     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+//     content.concat(String(mfrc522.uid.uidByte[i], HEX));
+//   }
+//   Serial.println();
+//   Serial.print("Message : ");
+//   content.toUpperCase();
+//   if (content.substring(1) == "FC 16 2F 02")
+//   {
+//     Serial.println("红-司令");
+//     int b1 = 1;
+//     //    delay(2000);
+//     return b1;
+//   }
+//   else if (content.substring(1) == "2A 77 B3 65")
+//   {
+//     Serial.println("红-师长");
+//     int b1 = 3;
+//     return b1;
+//   }
+//   else   {
+//     ;
+//     delay(2000);
+//   }
+// }
 int SCAN_rtags(int b2) {
   for (uint8_t reader = 0; reader < NR_OF_READERS; reader++) {
     // Look for new cards
@@ -156,9 +202,6 @@ else if (102,103,104,105,106,107,108,109,203,\
     return A;
 }
 
-{
-    /* code */
-}
 
 switch (A)
 {
@@ -201,7 +244,23 @@ default:
   break;
 }
 void loop() {
-  SUANFA();
+  for (int a=0;a<3;a++){
+      if (a==0){
+           ;
+           continue;
+      }
+      else if (a==1) {
+          /* code */
+      }
+      else if (a ==2)
+      {
+          SUANFA();
+          resetFunc();      //重启程序开始
+      }
+      
+      
+  }
+  
 }
 /**
    Helper routine to dump a byte array as hex values to Serial.
