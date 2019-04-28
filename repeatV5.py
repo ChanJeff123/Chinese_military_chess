@@ -13,6 +13,7 @@ fileTIP=r'/home/pi/Music/tips.mp3'
 file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
+
 def restart_program():
     python = sys.executable
     os.execl(python,python,* sys.argv)
