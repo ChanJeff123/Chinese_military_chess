@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*
 import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
+import serial
+ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=0.5)
 
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
@@ -85,13 +87,17 @@ try:
                 b2=a-12#b2黄方
             time.sleep(1)
         else:
-            id,text = reader.read()
-            print("secondone:"+str(text))
-            a = string.atoi(text)
-            a = string.atoi(text)
-            if a < 13:
-                b1=a#b1红方
-            elif a>=13 and a < 25:
+            # id,text = reader.read()
+            # print("secondone:"+str(text))
+            # a = string.atoi(text)
+            # a = string.atoi(text)
+            ser.write(b"GET TAGS")
+            response =ser.read(20)
+            if response.startswith('num:'):
+                c=response.strip('num:\n\r')
+            if c < 13:
+                b1=c#b1红方
+            elif c>=13 and c < 25:
                 b2=a-12#b2黄方
             time.sleep(1)
 #算法
