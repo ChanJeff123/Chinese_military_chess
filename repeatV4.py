@@ -57,32 +57,21 @@ def no_win():
     threading.Thread(target=Music(fileNONE)).start()
     print("双方出局 all out!")
 
-def GET_B():
-    X=0
-    Y=0
-    # if(X==0 or Y==0):
+def Arduino_one():
     ser.write(b"GET TAGS")
     response =ser.read(20)
     if response.startswith('num:'):
-        global X,Y
-        c=response.strip('num:\n\r')
-        a = string.atoi(c)
+        x=response.strip('num:\n\r')
+        a = string.atoi(x)
         print("Arduino_one:",a)
-        if a < 13:
-            X=a#X红方
-        elif a>=13 and a < 25:
-            Y=a-12#Y黄方
-    else:
-        global X,Y
-        id,text = reader.read()
-        print("OG_one:"+str(text))
-        a = string.atoi(text)
-        if a < 13:
-            X=a#X红方
-        elif a>=13 and a < 25:
-            Y=a-12#Y黄方
-# else:
-    return(X,Y)
+        return a;
+
+def OG_one():
+    id,text = reader.read()
+    print("OG_one:"+str(text))
+    a = string.atoi(text)
+    return a;
+
 
 '''
 1 表示红方司令    13 表示黄方司令
@@ -100,7 +89,19 @@ def GET_B():
 '''
 #main 核心代码区
 try:
-    b1,b2=GET_B()
+    for i in range(2):
+        if i ==0:
+            a=Arduino_one()
+            if a < 13:
+                b1=a#b1红方
+            elif a>=13 and a < 25:
+                b2=a-12#b2黄方
+        else:
+            a=OG_one()
+            if a < 13:
+                b1=a#b1红方
+            elif a>=13 and a < 25:
+                b2=a-12#b2黄方
 #算法
 # 比較大小，普通的情况
     if b1<10 and b2<10 and b1 < b2:
