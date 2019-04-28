@@ -13,7 +13,6 @@ fileNONE=r'/home/pi/Music/out双方出局.mp3'
 file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
-fileTIP=r'/home/pi/Music/tips.mp3'
 
 def Music(X):
     pygame.mixer.init()
@@ -21,64 +20,44 @@ def Music(X):
     pygame.mixer.music.play()
     time.sleep(2)
     pygame.mixer.music.stop()
-
 def restart_program():
     python = sys.executable
     os.execl(python,python,* sys.argv)
-
-def led(L):
-    if L==red:
-        led=11
-    elif L==yellow:
-        led=13
+def Yled():
+    led=13
     GPIO.setup(led,GPIO.OUT)
     GPIO.output(led,True)
-    time.sleep(0.5)
+    time.sleep(1)
     GPIO.output(led,False)
-
-def type_print(t):
-    if t==end_rw:
-        print("end！game over!红方胜")
-    if t==end_yw:
-        print("end！game over!黄方胜")
-    if t==yw:
-        print("yellow side win!黄方胜")
-    if t==rw:
-        print("red side win!红方胜")
-    if t==all_out:
-        print("双方出局 all out!")
-    if t==error:
-        print("error!wrong operation")
+def Rled():
+    led=11
+    GPIO.setup(led,GPIO.OUT)
+    GPIO.output(led,True)
+    time.sleep(1)
+    GPIO.output(led,False)
 def b1_win():
-    threading.Thread(target=led(red)).start()
+    # threading.Thread(target=print("red side win!红方胜")).start()
+    threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileRW)).start()
-    threading.Thread(target=type_print(rw)).start()
+    print("red side win!红方胜")
+    # Rled()
+    # Music(fileRW)
 def b2_win():
-    threading.Thread(target=led(yellow)).start()
+    # threading.Thread(target=print("yellow side win!黄方胜")).start()
+    threading.Thread(target=Yled).start()
     threading.Thread(target=Music(fileYW)).start()
-    threading.Thread(target=type_print(yw)).start()
-
+    print("yellow side win!黄方胜")
+    # Yled()
+    # Music(fileYW)
 def no_win():
-    threading.Thread(target=led(yellow)).start()
-    threading.Thread(target=led(red)).start()
+    # threading.Thread(target=print("all out!")).start()
+    threading.Thread(target=Yled).start()
+    threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileNONE)).start()
-    threading.Thread(target=type_print(all_out)).start()
-
-def endYW():
-    threading.Thread(target=led(yellow)).start()
-    threading.Thread(target=Music(file5)).start()
-    threading.Thread(target=type_print(end_yw)).start()
-def endRW():
-    threading.Thread(target=led(red)).start()
-    threading.Thread(target=Music(file6)).start()
-    threading.Thread(target=type_print(end_rw)).start()
-def error():
-    threading.Thread(target=type_print(error)).start()
-    Music(file4)
-def tips():
-    threading.Thread(target=led(red)).start()
-    threading.Thread(target=Music(fileTIP)).start()
-
+    print("双方出局 all out!")
+    # Rled()
+    # Yled()
+    # Music(fileNONE)
 '''
 1 表示红方司令    13 表示黄方司令
 2 表示红方军长    14 表示黄方军长
