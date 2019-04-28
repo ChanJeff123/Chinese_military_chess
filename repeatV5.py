@@ -2,7 +2,6 @@
 # -*- coding: UTF-8 -*
 import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
-
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
 print("Looking for cards.Press Ctrl-C to stop.")
@@ -14,18 +13,15 @@ fileTIP=r'/home/pi/Music/tips.mp3'
 file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
-
 def restart_program():
     python = sys.executable
     os.execl(python,python,* sys.argv)
-
 def Music(X):
     pygame.mixer.init()
     track = pygame.mixer.music.load(X)
     pygame.mixer.music.play()
     time.sleep(2)
     pygame.mixer.music.stop()
-
 def led(L):
     if L==red:
         led=11
@@ -33,9 +29,8 @@ def led(L):
         led=13
     GPIO.setup(led,GPIO.OUT)
     GPIO.output(led,True)
-    time.sleep(0.4)
+    time.sleep(0.5)
     GPIO.output(led,False)
-
 def type_print(t):
     if t==end_rw:
         print("end！game over!红方胜")
@@ -49,7 +44,6 @@ def type_print(t):
         print("双方出局 all out!")
     if t==error:
         print("error!wrong operation")
-
 def b1_win():
     threading.Thread(target=led(red)).start()
     threading.Thread(target=Music(fileRW)).start()
@@ -59,26 +53,23 @@ def b2_win():
     threading.Thread(target=Music(fileYW)).start()
     threading.Thread(target=type_print(yw)).start()
 def no_win():
-    threading.Thread(target=led(yellow)).start()
-    threading.Thread(target=led(red)).start()
+    threading.Thread(target=Yled).start()
+    threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileNONE)).start()
     threading.Thread(target=type_print(all_out)).start()
-
-
 def endYW():
-    threading.Thread(target=led(yellow)).start()
+    threading.Thread(target=Yled).start()
     threading.Thread(target=Music(file5)).start()
     threading.Thread(target=type_print(end_yw)).start()
 def endRW():
-    threading.Thread(target=led(red)).start()
+    threading.Thread(target=Rled).start()
     threading.Thread(target=Music(file6)).start()
     threading.Thread(target=type_print(end_rw)).start()
-
 def error():
     threading.Thread(target=type_print(error)).start()
     Music(file4)
 def tips():
-    threading.Thread(target=led(yellow)).start()
+    threading.Thread(target=Yled).start()
     threading.Thread(target=Music(fileTIP)).start()
 '''
 1 表示红方司令    13 表示黄方司令
@@ -154,7 +145,6 @@ try:
     GPIO.cleanup()
     restart_program()
 except KeyboardInterrupt:
-    restart_program()
     pass
 finally:
     GPIO.cleanup()
