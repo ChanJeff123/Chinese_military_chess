@@ -52,13 +52,13 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 | 11 | 红方炸弹 | 23 | 黄方炸弹 |
 | 12 | 红方军旗 | 24 | 黄方军旗 |
 
->sudo python ezWrite.py
+>python ezWrite.py
 
 读一下试试，结果是写入的数字
->sudo python ezRead.py
+>python ezRead.py
 
 然后就可以直接上核心代码啦！
->sudo python repeatV5.py
+>python repeatV5.py
 
 Any question connect me.  
 ccwanyuan2014@163.com
