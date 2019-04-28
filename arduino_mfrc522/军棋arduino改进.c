@@ -177,7 +177,9 @@ void setup()
   digitalWrite(red_w, LOW);
   pinMode(yellow_w, OUTPUT);
   digitalWrite(yellow_w, LOW);
-
+  int a, b1, b2;
+}
+void loop() {
   uchar status;
   uchar str[MAX_LEN];
   // Search card, return card types
@@ -186,7 +188,6 @@ void setup()
   {
     return;
   }
-
   //Prevent conflict, return the 4 bytes Serial number of the card
   status = MFRC522_Anticoll(str);
 
@@ -352,24 +353,21 @@ void setup()
       Serial.println("Hello unkown guy!");
       delay(2000);
     }
-    
   }
-    int a, b1, b2;
-}
-void loop() {
+
 
   if (a > 12) { //yellow side
-      int b1 = a - 12;
-      return b1;
-      Serial.print("b1 is:1111 ");
-    } else if (a <= 12) { //red side
-      int b2 = a;
-      return b2;
-    }
-    else
-    {
-      ERROR_GAME();
-    }
+    int b1 = a - 12;
+    return b1;
+    Serial.print("b1 is:1111 ");
+  } else if (a <= 12) { //red side
+    int b2 = a;
+    return b2;
+  }
+  else
+  {
+    ERROR_GAME();
+  }
   //比較大小，普通的情况
   if (b1 < 10 && b2 < 10 && b1 < b2) {
     b1_win();

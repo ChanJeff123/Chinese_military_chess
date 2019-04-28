@@ -154,6 +154,7 @@ try:
     GPIO.cleanup()
     restart_program()
 except KeyboardInterrupt:
+    restart_program()
     pass
 finally:
     GPIO.cleanup()
