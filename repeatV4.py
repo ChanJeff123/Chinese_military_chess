@@ -89,53 +89,61 @@ def OG_one():
 '''
 #main 核心代码区
 try:
-    for i in range(2):
-        if i ==0:
-            a=Arduino_one()
-            if a < 13:
-                b1=a#b1红方
-            elif a>=13 and a < 25:
-                b2=a-12#b2黄方
-        else:
-            a=OG_one()
-            if a < 13:
-                b1=a#b1红方
-            elif a>=13 and a < 25:
-                b2=a-12#b2黄方
-#算法
-# 比較大小，普通的情况
-    if b1<10 and b2<10 and b1 < b2:
-        b1_win()
-    elif b1<10 and b2<10 and b2 < b1:
-        b2_win()
-    elif b1 == b2:
-        no_win()
-    # 出错情况
-    # if b1 == 10 or b2 == 12:
-    # 	error()
-    # 获胜的情况
-    elif b1 == 12:
-        b2_win()
-    elif b2 == 12:
-        b1_win()
-    # 两方都消失的情况
-    elif b1 == 11 or b2 == 11:
-        no_win()
-    # 对是M（地雷）分情况考虑
-    elif b1 == 10:
-        if b2 == 9:
-            b2_win()
-        elif b2 == 11:
-            no_win()
-        else:
-            b1_win()
-    elif b2 == 10:
-        if b1 == 9:
-            b1_win()
-        elif b1 == 11:
-            no_win()
-        else:
-            b2_win()
+    ser.write(b"GET TAGS")
+    response =ser.read(20)
+    if response.startswith('num:'):
+        x=response.strip('num:\n\r')
+        a = string.atoi(x)
+        print(a)
+        b1=3
+        b2=3
+    # for i in range(2):
+    #     if i ==0:
+    #         a=Arduino_one()
+    #         if a < 13:
+    #             b1=a#b1红方
+    #         elif a>=13 and a < 25:
+    #             b2=a-12#b2黄方
+    #     else:
+    #         a=OG_one()
+    #         if a < 13:
+    #             b1=a#b1红方
+    #         elif a>=13 and a < 25:
+    #             b2=a-12#b2黄方
+# #算法
+# # 比較大小，普通的情况
+#     if b1<10 and b2<10 and b1 < b2:
+#         b1_win()
+#     elif b1<10 and b2<10 and b2 < b1:
+#         b2_win()
+#     elif b1 == b2:
+#         no_win()
+#     # 出错情况
+#     # if b1 == 10 or b2 == 12:
+#     # 	error()
+#     # 获胜的情况
+#     elif b1 == 12:
+#         b2_win()
+#     elif b2 == 12:
+#         b1_win()
+#     # 两方都消失的情况
+#     elif b1 == 11 or b2 == 11:
+#         no_win()
+#     # 对是M（地雷）分情况考虑
+#     elif b1 == 10:
+#         if b2 == 9:
+#             b2_win()
+#         elif b2 == 11:
+#             no_win()
+#         else:
+#             b1_win()
+#     elif b2 == 10:
+#         if b1 == 9:
+#             b1_win()
+#         elif b1 == 11:
+#             no_win()
+#         else:
+#             b2_win()
     GPIO.cleanup()
     restart_program()
 except KeyboardInterrupt:
