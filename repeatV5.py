@@ -59,18 +59,18 @@ def b2_win():
     threading.Thread(target=Music(fileYW)).start()
     threading.Thread(target=type_print(yw)).start()
 def no_win():
-    threading.Thread(target=Yled).start()
-    threading.Thread(target=Rled).start()
+    threading.Thread(target=led(yellow)).start()
+    threading.Thread(target=led(red)).start()
     threading.Thread(target=Music(fileNONE)).start()
     threading.Thread(target=type_print(all_out)).start()
 
 
 def endYW():
-    threading.Thread(target=Yled).start()
+    threading.Thread(target=led(yellow)).start()
     threading.Thread(target=Music(file5)).start()
     threading.Thread(target=type_print(end_yw)).start()
 def endRW():
-    threading.Thread(target=Rled).start()
+    threading.Thread(target=led(red)).start()
     threading.Thread(target=Music(file6)).start()
     threading.Thread(target=type_print(end_rw)).start()
 
@@ -78,7 +78,7 @@ def error():
     threading.Thread(target=type_print(error)).start()
     Music(file4)
 def tips():
-    threading.Thread(target=Yled).start()
+    threading.Thread(target=led(yellow)).start()
     threading.Thread(target=Music(fileTIP)).start()
 '''
 1 表示红方司令    13 表示黄方司令
