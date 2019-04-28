@@ -33,7 +33,7 @@ def led(L):
         led=13
     GPIO.setup(led,GPIO.OUT)
     GPIO.output(led,True)
-    time.sleep(1)
+    time.sleep(0.4)
     GPIO.output(led,False)
 
 def type_print(t):
