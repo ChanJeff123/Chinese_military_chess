@@ -16,50 +16,74 @@ file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
 
+def restart_program():
+    python = sys.executable
+    os.execl(python,python,* sys.argv)
+
 def Music(X):
     pygame.mixer.init()
     track = pygame.mixer.music.load(X)
     pygame.mixer.music.play()
     time.sleep(2)
     pygame.mixer.music.stop()
-def restart_program():
-    python = sys.executable
-    os.execl(python,python,* sys.argv)
+
 def Yled():
     led=13
     GPIO.setup(led,GPIO.OUT)
     GPIO.output(led,True)
     time.sleep(1)
     GPIO.output(led,False)
+
 def Rled():
     led=11
     GPIO.setup(led,GPIO.OUT)
     GPIO.output(led,True)
     time.sleep(1)
     GPIO.output(led,False)
+
 def b1_win():
-    # threading.Thread(target=print("red side win!红方胜")).start()
     threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileRW)).start()
     print("red side win!红方胜")
-    # Rled()
-    # Music(fileRW)
+
 def b2_win():
-    # threading.Thread(target=print("yellow side win!黄方胜")).start()
     threading.Thread(target=Yled).start()
     threading.Thread(target=Music(fileYW)).start()
     print("yellow side win!黄方胜")
-    # Yled()
-    # Music(fileYW)
+
 def no_win():
-    # threading.Thread(target=print("all out!")).start()
     threading.Thread(target=Yled).start()
     threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileNONE)).start()
     print("双方出局 all out!")
-    # Rled()
-    # Yled()
-    # Music(fileNONE)
+
+def GET_B():
+    X=0
+    Y=0
+    # if(X==0 or Y==0):
+    ser.write(b"GET TAGS")
+    response =ser.read(20)
+    if response.startswith('num:'):
+        global X,Y
+        c=response.strip('num:\n\r')
+        a = string.atoi(c)
+        print("Arduino_one:",a)
+        if a < 13:
+            X=a#X红方
+        elif a>=13 and a < 25:
+            Y=a-12#Y黄方
+    else:
+        global X,Y
+        id,text = reader.read()
+        print("OG_one:"+str(text))
+        a = string.atoi(text)
+        if a < 13:
+            X=a#X红方
+        elif a>=13 and a < 25:
+            Y=a-12#Y黄方
+# else:
+    return(X,Y)
+
 '''
 1 表示红方司令    13 表示黄方司令
 2 表示红方军长    14 表示黄方军长
@@ -74,32 +98,9 @@ def no_win():
 11 表示红方炸弹   23 表示黄方炸弹 
 12 表示红方军旗   24 表示黄方军旗 
 '''
-#转化
+#main 核心代码区
 try:
-    for i in range(1,3):
-        if i==1:
-            id,text = reader.read()
-            print("fristone:"+str(text))
-            a = string.atoi(text)
-            if a < 13:
-                b1=a#b1红方
-            elif a>=13 and a < 25:
-                b2=a-12#b2黄方
-            time.sleep(1)
-        else:
-            # id,text = reader.read()
-            # print("secondone:"+str(text))
-            # a = string.atoi(text)
-            # a = string.atoi(text)
-            ser.write(b"GET TAGS")
-            response =ser.read(20)
-            if response.startswith('num:'):
-                c=response.strip('num:\n\r')
-            if c < 13:
-                b1=c#b1红方
-            elif c>=13 and c < 25:
-                b2=a-12#b2黄方
-            time.sleep(1)
+    b1,b2=GET_B()
 #算法
 # 比較大小，普通的情况
     if b1<10 and b2<10 and b1 < b2:
