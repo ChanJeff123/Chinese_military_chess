@@ -4,8 +4,6 @@ import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
 import serial
 ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=0.5)
-ser.write(b"GET TAGS")
-response =ser.read(20)
 
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
@@ -60,16 +58,18 @@ def no_win():
     print("双方出局 all out!")
 
 def Arduino_one():
-    # ser.write(b"GET TAGS")
-    # response =ser.read(20)
+    ser.write(b"GET TAGS")
+    response =ser.read(20)
     if response.startswith('num:'):
         x=response.strip('num:\n\r')
         a = string.atoi(x)
         print "Arduino_one:",a
         if a < 13:
-            global b1=a#b1红方
+            global b1
+	    b1=a#b1红方
         elif a>=13 and a < 25:
-            global b2=a-12#b2黄方
+            global b2
+	    b2=a-12#b2黄方
         # return a;
 
 
@@ -78,9 +78,11 @@ def OG_one():
     print("OG_one:"+str(text))
     a = string.atoi(text)
     if a < 13:
-        global b1=a#b1红方
+        global b1
+	b1=a#b1红方
     elif a>=13 and a < 25:
-        global b2=a-12#b2黄方
+        global b2
+	b2=a-12#b2黄方
     # return a;
 def SUANFA():
     #算法
@@ -139,12 +141,13 @@ try:
     b1=0
     b2=0
     while b1==0 or b2==0:
-        OG_one()
         Arduino_one()
+        OG_one()
     else:
         SUANFA()
-
+        restart_program()
 except KeyboardInterrupt:
     pass
 finally:
     GPIO.cleanup()
+

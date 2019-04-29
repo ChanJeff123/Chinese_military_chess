@@ -4,8 +4,6 @@ import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
 import serial
 ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=0.5)
-ser.write(b"GET TAGS")
-response =ser.read(20)
 
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
@@ -60,65 +58,19 @@ def no_win():
     print("双方出局 all out!")
 
 def Arduino_one():
-    # ser.write(b"GET TAGS")
-    # response =ser.read(20)
+    ser.write(b"GET TAGS")
+    response =ser.read(20)
     if response.startswith('num:'):
         x=response.strip('num:\n\r')
         a = string.atoi(x)
-        print "Arduino_one:",a
-        if a < 13:
-            global b1=a#b1红方
-        elif a>=13 and a < 25:
-            global b2=a-12#b2黄方
-        # return a;
-
+        print("Arduino_one:",a)
+        return a;
 
 def OG_one():
     id,text = reader.read()
     print("OG_one:"+str(text))
     a = string.atoi(text)
-    if a < 13:
-        global b1=a#b1红方
-    elif a>=13 and a < 25:
-        global b2=a-12#b2黄方
-    # return a;
-def SUANFA():
-    #算法
-# 比較大小，普通的情况
-    if b1==range(1,13) and b2==range(1,13) :
-        if b1<10 and b2<10 and b1 < b2:
-            b1_win()
-        elif b1<10 and b2<10 and b2 < b1:
-            b2_win()
-        elif b1 == b2:
-            no_win()
-        # 获胜的情况
-        elif b1 == 12:
-            b2_win()
-        elif b2 == 12:
-            b1_win()
-        # 两方都消失的情况
-        elif b1 == 11 or b2 == 11:
-            no_win()
-        # 对是M（地雷）分情况考虑
-        elif b1 == 10:
-            if b2 == 9:
-                b2_win()
-            elif b2 == 11:
-                no_win()
-            else:
-                b1_win()
-        elif b2 == 10:
-            if b1 == 9:
-                b1_win()
-            elif b1 == 11:
-                no_win()
-            else:
-                b2_win()
-    else:
-        pass
-
-
+    return a;
 
 '''
 1 表示红方司令    13 表示黄方司令
@@ -136,15 +88,65 @@ def SUANFA():
 '''
 #main 核心代码区
 try:
-    b1=0
-    b2=0
-    while b1==0 or b2==0:
-        OG_one()
-        Arduino_one()
-    else:
-        SUANFA()
-
+    ser.write(b"GET TAGS")
+    response =ser.read(20)
+    if response.startswith('num:'):
+        x=response.strip('num:\n\r')
+        a = string.atoi(x)
+        print(a)
+	if a==3:
+	    b1=2
+	    b2=4
+    # for i in range(2):
+    #     if i ==0:
+    #         a=Arduino_one()
+    #         if a < 13:
+    #             b1=a#b1红方
+    #         elif a>=13 and a < 25:
+    #             b2=a-12#b2黄方
+    #     else:
+    #         a=OG_one()
+    #         if a < 13:
+    #             b1=a#b1红方
+    #         elif a>=13 and a < 25:
+    #             b2=a-12#b2黄方
+# 比較大小，普通的情况
+    if b1<10 and b2<10 and b1 < b2:
+        b1_win()
+    elif b1<10 and b2<10 and b2 < b1:
+        b2_win()
+    elif b1 == b2:
+        no_win()
+    # 出错情况
+    # if b1 == 10 or b2 == 12:
+    # 	error()
+    # 获胜的情况
+    elif b1 == 12:
+        b2_win()
+    elif b2 == 12:
+        b1_win()
+    # 两方都消失的情况
+    elif b1 == 11 or b2 == 11:
+        no_win()
+    # 对是M（地雷）分情况考虑
+    elif b1 == 10:
+        if b2 == 9:
+            b2_win()
+        elif b2 == 11:
+            no_win()
+        else:
+            b1_win()
+    elif b2 == 10:
+        if b1 == 9:
+            b1_win()
+        elif b1 == 11:
+            no_win()
+        else:
+            b2_win()
+    GPIO.cleanup()
+    restart_program()
 except KeyboardInterrupt:
     pass
 finally:
     GPIO.cleanup()
+
