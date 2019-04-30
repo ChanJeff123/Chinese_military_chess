@@ -10,6 +10,7 @@ print("Looking for cards.Press Ctrl-C to stop.")
 fileRW=r'/home/pi/Music/红方胜利.mp3'
 fileYW=r'/home/pi/Music/黄方胜利.mp3'
 fileNONE=r'/home/pi/Music/out双方出局.mp3'
+fileTIP=r'/home/pi/Music/tips.mp3'
 file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
@@ -40,24 +41,36 @@ def b1_win():
     threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileRW)).start()
     print("red side win!红方胜")
-    # Rled()
-    # Music(fileRW)
+
 def b2_win():
     # threading.Thread(target=print("yellow side win!黄方胜")).start()
     threading.Thread(target=Yled).start()
     threading.Thread(target=Music(fileYW)).start()
     print("yellow side win!黄方胜")
-    # Yled()
-    # Music(fileYW)
+
 def no_win():
     # threading.Thread(target=print("all out!")).start()
     threading.Thread(target=Yled).start()
     threading.Thread(target=Rled).start()
     threading.Thread(target=Music(fileNONE)).start()
     print("双方出局 all out!")
-    # Rled()
-    # Yled()
-    # Music(fileNONE)
+
+def endYW():
+    print("end！game over!黄方胜")
+    threading.Thread(target=Yled).start()
+    threading.Thread(target=Music(file5)).start()
+
+def endRW():
+    print("end！game over!红方胜")
+    threading.Thread(target=Rled).start()
+    threading.Thread(target=Music(file6)).start()
+
+def error():
+    print("error!wrong operation")
+    Music(file4)
+def tips():
+    threading.Thread(target=Yled).start()
+    threading.Thread(target=Music(fileTIP)).start()
 '''
 1 表示红方司令    13 表示黄方司令
 2 表示红方军长    14 表示黄方军长
@@ -83,6 +96,7 @@ try:
                 b1=a#b1红方
             elif a>=13 and a < 25:
                 b2=a-12#b2黄方
+            tips()
             time.sleep(1)
         else:
             id,text = reader.read()
@@ -93,6 +107,7 @@ try:
                 b1=a#b1红方
             elif a>=13 and a < 25:
                 b2=a-12#b2黄方
+            tips()
             time.sleep(1)
 #算法
 # 比較大小，普通的情况
@@ -102,14 +117,11 @@ try:
         b2_win()
     elif b1 == b2:
         no_win()
-    # 出错情况
-    # if b1 == 10 or b2 == 12:
-    # 	error()
-    # 获胜的情况
+    # 获胜结束的情况
     elif b1 == 12:
-        b2_win()
+        endYW()
     elif b2 == 12:
-        b1_win()
+        endRW()
     # 两方都消失的情况
     elif b1 == 11 or b2 == 11:
         no_win()
@@ -128,6 +140,8 @@ try:
             no_win()
         else:
             b2_win()
+    else:
+        error()
     GPIO.cleanup()
     restart_program()
 except KeyboardInterrupt:

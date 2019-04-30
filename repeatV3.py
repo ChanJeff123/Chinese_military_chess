@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*
-import time,pygame,string,sys,os,threading,SimpleMFRC522
+import time
 import RPi.GPIO as GPIO
+import SimpleMFRC522
+import pygame
+import string
+import sys
+import os
 
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
@@ -36,28 +41,18 @@ def Rled():
     time.sleep(1)
     GPIO.output(led,False)
 def b1_win():
-    # threading.Thread(target=print("red side win!红方胜")).start()
-    threading.Thread(target=Rled).start()
-    threading.Thread(target=Music(fileRW)).start()
     print("red side win!红方胜")
-    # Rled()
-    # Music(fileRW)
+    Rled()
+    Music(fileRW)
 def b2_win():
-    # threading.Thread(target=print("yellow side win!黄方胜")).start()
-    threading.Thread(target=Yled).start()
-    threading.Thread(target=Music(fileYW)).start()
     print("yellow side win!黄方胜")
-    # Yled()
-    # Music(fileYW)
+    Yled()
+    Music(fileYW)
 def no_win():
-    # threading.Thread(target=print("all out!")).start()
-    threading.Thread(target=Yled).start()
-    threading.Thread(target=Rled).start()
-    threading.Thread(target=Music(fileNONE)).start()
-    print("双方出局 all out!")
-    # Rled()
-    # Yled()
-    # Music(fileNONE)
+    print("all out!")
+    Rled()
+    Yled()
+    Music(fileNONE)
 '''
 1 表示红方司令    13 表示黄方司令
 2 表示红方军长    14 表示黄方军长

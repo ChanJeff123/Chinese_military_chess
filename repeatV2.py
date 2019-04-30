@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*
-import time,pygame,string,sys,os,threading,SimpleMFRC522
+import time
 import RPi.GPIO as GPIO
+import SimpleMFRC522
+import pygame
+import string
+import sys
+import os
 
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
 print("Looking for cards.Press Ctrl-C to stop.")
 #create music files
-fileRW=r'/home/pi/Music/红方胜利.mp3'
-fileYW=r'/home/pi/Music/黄方胜利.mp3'
-fileNONE=r'/home/pi/Music/out双方出局.mp3'
+file1=r'/home/pi/Music/红方胜利.mp3'
+file2=r'/home/pi/Music/黄方胜利.mp3'
+file3=r'/home/pi/Music/out双方出局.mp3'
 file4=r'/home/pi/Music/error非法操作.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
+pygame.mixer.init()
 
-def Music(X):
-    pygame.mixer.init()
-    track = pygame.mixer.music.load(X)
-    pygame.mixer.music.play()
-    time.sleep(2)
-    pygame.mixer.music.stop()
 def restart_program():
     python = sys.executable
     os.execl(python,python,* sys.argv)
@@ -36,28 +36,29 @@ def Rled():
     time.sleep(1)
     GPIO.output(led,False)
 def b1_win():
-    # threading.Thread(target=print("red side win!红方胜")).start()
-    threading.Thread(target=Rled).start()
-    threading.Thread(target=Music(fileRW)).start()
     print("red side win!红方胜")
-    # Rled()
-    # Music(fileRW)
+    Rled()
+    track = pygame.mixer.music.load(file1)
+    pygame.mixer.music.play()
+    time.sleep(2)
+    pygame.mixer.music.stop()
+
 def b2_win():
-    # threading.Thread(target=print("yellow side win!黄方胜")).start()
-    threading.Thread(target=Yled).start()
-    threading.Thread(target=Music(fileYW)).start()
     print("yellow side win!黄方胜")
-    # Yled()
-    # Music(fileYW)
+    Yled()
+    track = pygame.mixer.music.load(file2)
+    pygame.mixer.music.play()
+    time.sleep(2)
+    pygame.mixer.music.stop()
+
 def no_win():
-    # threading.Thread(target=print("all out!")).start()
-    threading.Thread(target=Yled).start()
-    threading.Thread(target=Rled).start()
-    threading.Thread(target=Music(fileNONE)).start()
-    print("双方出局 all out!")
-    # Rled()
-    # Yled()
-    # Music(fileNONE)
+    print("all out!")
+    Rled()
+    Yled()
+    track = pygame.mixer.music.load(file3)
+    pygame.mixer.music.play()
+    time.sleep(2)
+    pygame.mixer.music.stop()
 '''
 1 表示红方司令    13 表示黄方司令
 2 表示红方军长    14 表示黄方军长

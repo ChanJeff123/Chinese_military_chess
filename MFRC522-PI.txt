@@ -1,0 +1,9 @@
+核心文档
+SingleCard_v1.py 区分攻击方和防守方 先后读卡顺序 先进攻在防守 12个编号
+SingleCard_v2.py 不区分先后读卡顺序 分红方和蓝方 ，忽略地雷和军旗不能进攻 24个编号
+repeatv1.py 可循环读卡 两秒 12编号 区分顺序
+repeatv2.py 可循环读卡 两秒 24编号
+repeatv3.py 可循环读卡 两秒 24编号优化函数传参
+repeatv4.py 可循环读卡 两秒 24编号 多线程同时执行
+led_rfid.py实现唯一卡作为开关。
+fanled_rfid.py实现指定卡指定功能
