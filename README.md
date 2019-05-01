@@ -58,7 +58,7 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 >python ezRead.py
 
 然后就可以直接上核心代码啦！
->python repeatV4.py
+>python repeatV5.py
 
 Any question connect me.  
 ccwanyuan2014@163.com
