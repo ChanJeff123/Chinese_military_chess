@@ -6,6 +6,7 @@ import serial
 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0.5)
 
 GPIO.setmode(GPIO.BOARD)
+
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
 # print("Looking for cards.Press Ctrl-C to stop.")
