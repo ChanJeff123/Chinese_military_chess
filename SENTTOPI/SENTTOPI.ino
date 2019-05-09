@@ -63,7 +63,7 @@ void loop()
         delay(1000);
       }
       else if ((content.substring(1) == "FC 08 2F 02" ) or \
-               (content.substring(1) == "C1 07 2F 02")) {
+               (content.substring(1) == "0C 17 2F 02")) {
         Serial.println("num:6");
         delay(1000);
       }
@@ -80,7 +80,7 @@ void loop()
         delay(1000);
       }
       else if ((content.substring(1) == "4C 29 2F 02" ) or \
-               (content.substring(1) == "CF 0A 2E 02") or \
+               (content.substring(1) == "0C FA 2E 02") or \
                (content.substring(1) == "7C 10 2F 02")) {
         Serial.println("num:9");
         delay(1000);
@@ -137,7 +137,7 @@ void loop()
       }
       else if ((content.substring(1) == "FC 22 2F 02" ) or \
                (content.substring(1) == "1C 08 2F 02") or \
-               (content.substring(1) == "C2 03 2F 02")) {
+               (content.substring(1) == "0C 23 2F 02")) {
         Serial.println("num:20");
         delay(1000);
       }
@@ -149,7 +149,7 @@ void loop()
       }
       else if ((content.substring(1) == "4C FB 2E 02" ) or \
                (content.substring(1) == "BC 05 2F 02") or \
-               (content.substring(1) == "C1 04 2F 02")) {
+               (content.substring(1) == "0C 14 2F 02")) {
         Serial.println("num:22");
         delay(1000);
       }
@@ -160,6 +160,68 @@ void loop()
       }
       else if (content.substring(1) == "3C 1A 2F 02") {
         Serial.println("num:24");
+        delay(1000);
+      }
+      else if (content.substring(1) == "EC EC 2E 02") //change here the UID of the card/cards that you want to give access
+      {
+        Serial.println("num:25");
+        delay(1000);
+      }
+      else if (content.substring(1) == "4C FF 2E 02") {
+        Serial.println("num:26");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "4C 0D 2F 02" ) or \
+               (content.substring(1) == "EC F7 2E 02")) {
+        Serial.println("num:27");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "8C 04 2F 02" ) or \
+               (content.substring(1) == "0C 26 2F 02")) {
+        Serial.println("num:28");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "5C 1D 2F 02" ) or \
+               (content.substring(1) == "1C 26 2F 02")) {
+        Serial.println("num:29");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "EC BD 2E 02" ) or \
+               (content.substring(1) == "FC E7 2E 02")) {
+        Serial.println("num:30");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "FC EE 2E 02" ) or \
+               (content.substring(1) == "6C 2C 2F 02") or \
+               (content.substring(1) == "7C 04 2F 02")) {
+        Serial.println("num:31");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "5C 0D 2F 02" ) or \
+               (content.substring(1) == "8C 14 2F 02") or \
+               (content.substring(1) == "0C EE 2E 02")) {
+        Serial.println("num:32");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "2C 08 2F 02" ) or \
+               (content.substring(1) == "EC C4 2E 02") or \
+               (content.substring(1) == "DC F7 2E 02")) {
+        Serial.println("num:33");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "2C FD 2E 02" ) or \
+               (content.substring(1) == "4C A6 2E 02") or \
+               (content.substring(1) == "4C 1A 2F 02")) {
+        Serial.println("num:34");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "0C EF 2E 02" ) or \
+               (content.substring(1) == "9C AC 2E 02")) {
+        Serial.println("num:35");
+        delay(1000);
+      }
+      else if (content.substring(1) == "0C E8 2E 02") {
+        Serial.println("num:36");
         delay(1000);
       }
       else   {
