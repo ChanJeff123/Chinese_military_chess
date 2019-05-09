@@ -6,7 +6,6 @@ import serial
 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0.5)
 
 GPIO.setmode(GPIO.BOARD)
-
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
 # print("Looking for cards.Press Ctrl-C to stop.")
@@ -14,6 +13,7 @@ reader = SimpleMFRC522.SimpleMFRC522()
 fileRW=r'/home/pi/Music/红方胜利.mp3'
 fileYW=r'/home/pi/Music/黄方胜利.mp3'
 fileNONE=r'/home/pi/Music/out双方出局.mp3'
+fileTips=r'/home/pi/Music/tips.mp3'
 file5=r'/home/pi/Music/游戏结束黄方胜利.mp3'
 file6=r'/home/pi/Music/游戏结束红方胜利.mp3'
 
@@ -78,8 +78,9 @@ def Arduino_one():
     if response.startswith('num:'):
         x=response.strip('num:\n\r')
         a= int(x)
-        print("Arduino_one:",a)
-        Rled()
+        print "Arduino_one:",a
+        threading.Thread(target=Rled).start()
+        threading.Thread(target=Music(fileTips)).start()
         if a < 13:
             b1=a#b1红方
         elif a>=13 and a < 25:
@@ -101,7 +102,8 @@ def OG_one():
     elif a>=13 and a < 25:
         b2=a-12#b2黄方
     print ((a,b2) if(b2>0) else (a,b1))
-    Yled()
+    threading.Thread(target=Yled).start()
+    threading.Thread(target=Music(fileTips)).start()
     i+=1
     print "i=",i
     return i
@@ -159,3 +161,4 @@ except KeyboardInterrupt:
     ser.close()
 finally:
     GPIO.cleanup()
+    restart_program()
