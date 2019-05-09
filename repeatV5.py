@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*
 import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
-
+GPIO.setmode(GPIO.BOARD)
 reader = SimpleMFRC522.SimpleMFRC522()
 # Welcome message
 print("Looking for cards.Press Ctrl-C to stop.")
