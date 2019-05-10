@@ -3,13 +3,13 @@
 
 #define SS_PIN 10
 #define RST_PIN 9
-MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
+MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 void setup()
 {
-  Serial.begin(115200);   // Initiate a serial communication
-  SPI.begin();      // Initiate  SPI bus
-  mfrc522.PCD_Init();   // Initiate MFRC522
+  Serial.begin(9600);
+  SPI.begin();
+  mfrc522.PCD_Init();
 }
 
 char target[] = "GET TAGS";
@@ -19,17 +19,14 @@ void loop()
   delay(1000);
   if (Serial.available() > 0) {
     if ( Serial.find(target)) {
-      // Look for new cards
       if ( ! mfrc522.PICC_IsNewCardPresent())
       {
         return;
       }
-      // Select one of the cards
       if ( ! mfrc522.PICC_ReadCardSerial())
       {
         return;
       }
-      //Show UID on serial monitor
       String content = "";
       byte letter;
       for (byte i = 0; i < mfrc522.uid.size; i++)
@@ -38,7 +35,7 @@ void loop()
         content.concat(String(mfrc522.uid.uidByte[i], HEX));
       }
       content.toUpperCase();
-      if (content.substring(1) == "9C 21 2F 02") //change here the UID of the card/cards that you want to give access
+      if (content.substring(1) == "9C 21 2F 02")
       {
         Serial.println("num:1");
         delay(1000);
@@ -100,7 +97,7 @@ void loop()
         Serial.println("num:12");
         delay(1000);
       }
-      else if (content.substring(1) == "FC 16 2F 02") //change here the UID of the card/cards that you want to give access
+      else if (content.substring(1) == "FC 16 2F 02")
       {
         Serial.println("num:13");
         delay(1000);
@@ -162,7 +159,7 @@ void loop()
         Serial.println("num:24");
         delay(1000);
       }
-      else if (content.substring(1) == "EC EC 2E 02") //change here the UID of the card/cards that you want to give access
+      else if (content.substring(1) == "EC EC 2E 02")
       {
         Serial.println("num:25");
         delay(1000);
@@ -222,6 +219,68 @@ void loop()
       }
       else if (content.substring(1) == "0C E8 2E 02") {
         Serial.println("num:36");
+        delay(1000);
+      }
+      else if (content.substring(1) == "1C DA 2E 02")
+      {
+        Serial.println("num:37");
+        delay(1000);
+      }
+      else if (content.substring(1) == "DC D0 2E 02") {
+        Serial.println("num:38");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "2C E2 2E 02" ) or \
+               (content.substring(1) == "BC B9 2E 02")) {
+        Serial.println("num:39");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "8C C9 2E 02" ) or \
+               (content.substring(1) == "EC D0 2E 02")) {
+        Serial.println("num:40");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "2C C1 2E 02" ) or \
+               (content.substring(1) == "5C DB 2E 02")) {
+        Serial.println("num:41");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "EC BB 2E 02" ) or \
+               (content.substring(1) == "2C B4 2E 02")) {
+        Serial.println("num:42");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "AC CB 2E 02" ) or \
+               (content.substring(1) == "7C C9 2E 02") or \
+               (content.substring(1) == "4C C8 2E 02")) {
+        Serial.println("num:43");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "1C B2 2E 02" ) or \
+               (content.substring(1) == "2C D9 2E 02") or \
+               (content.substring(1) == "0C DA 2E 02")) {
+        Serial.println("num:44");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "0C D8 2E 02" ) or \
+               (content.substring(1) == "1C E2 2E 02") or \
+               (content.substring(1) == "FC D1 2E 02")) {
+        Serial.println("num:45");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "6C CA 2E 02" ) or \
+               (content.substring(1) == "9C CB 2E 02") or \
+               (content.substring(1) == "CC D7 2E 02")) {
+        Serial.println("num:46");
+        delay(1000);
+      }
+      else if ((content.substring(1) == "BC D2 2E 02" ) or \
+               (content.substring(1) == "CC B9 2E 02")) {
+        Serial.println("num:47");
+        delay(1000);
+      }
+      else if (content.substring(1) == "3C D9 2E 02") {
+        Serial.println("num:48");
         delay(1000);
       }
       else   {
