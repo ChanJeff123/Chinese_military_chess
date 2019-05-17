@@ -109,328 +109,333 @@ void setup()
   pinMode(NRSTPD, OUTPUT);            //设置数字引脚9，不复位和断电（复位引脚)
   MFRC522_Init();
 }
+char target[] = "GET TAGS";
 void loop()
 {
-  uchar status;
-  uchar str[MAX_LEN];
-  status = MFRC522_Request(PICC_REQIDL, str);
-  if (status != MI_OK)
-  {
-    return;
-  }
-  status = MFRC522_Anticoll(str);
-  if (status == MI_OK)
-  {
-    Serial.print("The card's number is: ");
-    memcpy(serNum, str, 5);
-    ShowCardID(serNum);
-    uchar* id = serNum;
-    if (id[0] == 0x9C && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:1");
-      delay(1000);
-    } else if (id[0] == 0x5C && id[1] == 0x0E && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:2");
-      delay(1000);
-    } else if (id[0] == 0x3C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:3");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0xF6 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:3");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0x20 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:4");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0x20 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:4");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:5");
-      delay(1000);
-    } else if (id[0] == 0xCC && id[1] == 0xF8 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:5");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:6");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0x17 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:6");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:7");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0x11 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:7");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:7");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:8");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0x18 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:8");
-      delay(1000);
-    } else if (id[0] == 0x6C && id[1] == 0x1E && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:8");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0x29 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:9");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xFA && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:9");
-      delay(1000);
-    } else if (id[0] == 0x7C && id[1] == 0x10 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:9");
-      delay(1000);
-    } else if (id[0] == 0x3C && id[1] == 0x27 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:10");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0x6 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:10");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0x1 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:10");
-      delay(1000);
-    } else if (id[0] == 0x5C && id[1] == 0x1 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:11");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:11");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0xF4 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:12");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0x16 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:13");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:14");
-      delay(1000);
-    } else if (id[0] == 0x7C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:15");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0x1B && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:15");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:16");
-      delay(1000);
-    } else if (id[0] == 0x3C && id[1] == 0xFF && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:16");
-      delay(1000);
-    } else if (id[0] == 0xBC && id[1] == 0x3 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:17");
-      delay(1000);
-    } else if (id[0] == 0xCC && id[1] == 0x3 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:17");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0x0A && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:18");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:18");
-      delay(1000);
-    } else if (id[0] == 0x6C && id[1] == 0x0F && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:19");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:19");
-      delay(1000);
-    } else if (id[0] == 0xBC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:19");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0x22 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:20");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:20");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0x23 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:20");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:21");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0x12 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:21");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:21");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0xFB && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:22");
-      delay(1000);
-    } else if (id[0] == 0xBC && id[1] == 0x5 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:22");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0x14 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:22");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:23");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0xF3 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:23");
-      delay(1000);
-    } else if (id[0] == 0x3C && id[1] == 0x1A && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:24");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xEC && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:25");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0xFF && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:26");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0x0D && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:27");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xF7 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:27");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0x4 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:28");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0x26 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:28");
-      delay(1000);
-    } else if (id[0] == 0x5C && id[1] == 0x1D && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:29");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0x26 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:29");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xBD && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:30");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0xE7 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:30");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0xEE && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:31");
-      delay(1000);
-    } else if (id[0] == 0x6C && id[1] == 0x2C && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:31");
-      delay(1000);
-    } else if (id[0] == 0x7C && id[1] == 0x4 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:31");
-      delay(1000);
-    } else if (id[0] == 0x5C && id[1] == 0x0D && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:32");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0x14 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:32");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xEE && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:32");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:33");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xC4 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:33");
-      delay(1000);
-    } else if (id[0] == 0xDC && id[1] == 0xF7 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:33");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xFD && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:34");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0xA6 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:34");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0x1A && id[2] == 0x2F && id[3] == 0x2) {
-    Serial.println("num:34");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xEF && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:35");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0xAC && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:35");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xE8 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:36");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0xDA && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:37");
-      delay(1000);
-    } else if (id[0] == 0xDC && id[1] == 0xD0 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:38");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xE2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:39");
-      delay(1000);
-    } else if (id[0] == 0xBC && id[1] == 0xB9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:39");
-      delay(1000);
-    } else if (id[0] == 0x8C && id[1] == 0xC9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:40");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xD0 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:40");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xC1 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:41");
-      delay(1000);
-    } else if (id[0] == 0x5C && id[1] == 0xDB && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:41");
-      delay(1000);
-    } else if (id[0] == 0xEC && id[1] == 0xBB && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:42");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xB4 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:42");
-      delay(1000);
-    } else if (id[0] == 0xAC && id[1] == 0xCB && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:43");
-      delay(1000);
-    } else if (id[0] == 0x7C && id[1] == 0xC9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:43");
-      delay(1000);
-    } else if (id[0] == 0x4C && id[1] == 0xC8 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:43");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0xB2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:44");
-      delay(1000);
-    } else if (id[0] == 0x2C && id[1] == 0xD9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:44");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xDA && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:44");
-      delay(1000);
-    } else if (id[0] == 0x0C && id[1] == 0xD8 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:45");
-      delay(1000);
-    } else if (id[0] == 0x1C && id[1] == 0xE2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:45");
-      delay(1000);
-    } else if (id[0] == 0xFC && id[1] == 0xD1 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:45");
-      delay(1000);
-    } else if (id[0] == 0x6C && id[1] == 0xCA && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:46");
-      delay(1000);
-    } else if (id[0] == 0x9C && id[1] == 0xCB && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:46");
-      delay(1000);
-    } else if (id[0] == 0xCC && id[1] == 0xD7 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:46");
-      delay(1000);
-    } else if (id[0] == 0xBC && id[1] == 0xD2 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:47");
-      delay(1000);
-    } else if (id[0] == 0xCC && id[1] == 0xB9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:47");
-      delay(1000);
-    } else if (id[0] == 0x3C && id[1] == 0xD9 && id[2] == 0x2E && id[3] == 0x2) {
-    Serial.println("num:48");
-      delay(1000);
-    } else {
-      Serial.println("Hello unkown guy!");
+  delay(1000);
+  if (Serial.available() > 0) {
+    if ( Serial.find(target)) {
+      uchar status;
+      uchar str[MAX_LEN];
+      status = MFRC522_Request(PICC_REQIDL, str);
+      if (status != MI_OK)
+      {
+        return;
+      }
+      status = MFRC522_Anticoll(str);
+      if (status == MI_OK)
+      {
+        Serial.print("The card's number is: ");
+        memcpy(serNum, str, 5);
+        ShowCardID(serNum);
+        uchar* id = serNum;
+        if (id[0] == 0x9C && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:1");
+          delay(1000);
+        } else if (id[0] == 0x5C && id[1] == 0x0E && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:2");
+          delay(1000);
+        } else if (id[0] == 0x3C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:3");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0xF6 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:3");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0x20 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:4");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0x20 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:4");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:5");
+          delay(1000);
+        } else if (id[0] == 0xCC && id[1] == 0xF8 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:5");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:6");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0x17 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:6");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:7");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0x11 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:7");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:7");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xF1 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:8");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0x18 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:8");
+          delay(1000);
+        } else if (id[0] == 0x6C && id[1] == 0x1E && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:8");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0x29 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:9");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xFA && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:9");
+          delay(1000);
+        } else if (id[0] == 0x7C && id[1] == 0x10 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:9");
+          delay(1000);
+        } else if (id[0] == 0x3C && id[1] == 0x27 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:10");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0x6 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:10");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0x1 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:10");
+          delay(1000);
+        } else if (id[0] == 0x5C && id[1] == 0x1 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:11");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:11");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0xF4 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:12");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0x16 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:13");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:14");
+          delay(1000);
+        } else if (id[0] == 0x7C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:15");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0x1B && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:15");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0x2A && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:16");
+          delay(1000);
+        } else if (id[0] == 0x3C && id[1] == 0xFF && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:16");
+          delay(1000);
+        } else if (id[0] == 0xBC && id[1] == 0x3 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:17");
+          delay(1000);
+        } else if (id[0] == 0xCC && id[1] == 0x3 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:17");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0x0A && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:18");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:18");
+          delay(1000);
+        } else if (id[0] == 0x6C && id[1] == 0x0F && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:19");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:19");
+          delay(1000);
+        } else if (id[0] == 0xBC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:19");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0x22 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:20");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:20");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0x23 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:20");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:21");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0x12 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:21");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0x2E && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:21");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0xFB && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:22");
+          delay(1000);
+        } else if (id[0] == 0xBC && id[1] == 0x5 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:22");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0x14 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:22");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0xF2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:23");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0xF3 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:23");
+          delay(1000);
+        } else if (id[0] == 0x3C && id[1] == 0x1A && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:24");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xEC && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:25");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0xFF && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:26");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0x0D && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:27");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xF7 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:27");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0x4 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:28");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0x26 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:28");
+          delay(1000);
+        } else if (id[0] == 0x5C && id[1] == 0x1D && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:29");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0x26 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:29");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xBD && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:30");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0xE7 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:30");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0xEE && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:31");
+          delay(1000);
+        } else if (id[0] == 0x6C && id[1] == 0x2C && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:31");
+          delay(1000);
+        } else if (id[0] == 0x7C && id[1] == 0x4 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:31");
+          delay(1000);
+        } else if (id[0] == 0x5C && id[1] == 0x0D && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:32");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0x14 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:32");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xEE && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:32");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0x8 && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:33");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xC4 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:33");
+          delay(1000);
+        } else if (id[0] == 0xDC && id[1] == 0xF7 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:33");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xFD && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:34");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0xA6 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:34");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0x1A && id[2] == 0x2F && id[3] == 0x2) {
+          Serial.println("num:34");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xEF && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:35");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0xAC && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:35");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xE8 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:36");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0xDA && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:37");
+          delay(1000);
+        } else if (id[0] == 0xDC && id[1] == 0xD0 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:38");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xE2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:39");
+          delay(1000);
+        } else if (id[0] == 0xBC && id[1] == 0xB9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:39");
+          delay(1000);
+        } else if (id[0] == 0x8C && id[1] == 0xC9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:40");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xD0 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:40");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xC1 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:41");
+          delay(1000);
+        } else if (id[0] == 0x5C && id[1] == 0xDB && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:41");
+          delay(1000);
+        } else if (id[0] == 0xEC && id[1] == 0xBB && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:42");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xB4 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:42");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0xCB && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:43");
+          delay(1000);
+        } else if (id[0] == 0x7C && id[1] == 0xC9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:43");
+          delay(1000);
+        } else if (id[0] == 0x4C && id[1] == 0xC8 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:43");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0xB2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:44");
+          delay(1000);
+        } else if (id[0] == 0x2C && id[1] == 0xD9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:44");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xDA && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:44");
+          delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xD8 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:45");
+          delay(1000);
+        } else if (id[0] == 0x1C && id[1] == 0xE2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:45");
+          delay(1000);
+        } else if (id[0] == 0xFC && id[1] == 0xD1 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:45");
+          delay(1000);
+        } else if (id[0] == 0x6C && id[1] == 0xCA && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:46");
+          delay(1000);
+        } else if (id[0] == 0x9C && id[1] == 0xCB && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:46");
+          delay(1000);
+        } else if (id[0] == 0xCC && id[1] == 0xD7 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:46");
+          delay(1000);
+        } else if (id[0] == 0xBC && id[1] == 0xD2 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:47");
+          delay(1000);
+        } else if (id[0] == 0xCC && id[1] == 0xB9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:47");
+          delay(1000);
+        } else if (id[0] == 0x3C && id[1] == 0xD9 && id[2] == 0x2E && id[3] == 0x2) {
+          Serial.println("num:48");
+          delay(1000);
+        } else {
+          Serial.println("Hello unkown guy!");
+        }
+      }
     }
   }
 }
-
 
 void ShowCardID(uchar *id)
 {
