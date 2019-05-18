@@ -124,7 +124,7 @@ void loop()
       }
       else if ((content.substring(1) == "6C 0F 2F 02" ) or \
                (content.substring(1) == "AC 0B 2F 02") or \
-               (content.substring(1) == "BC 02 2F 02")) {
+               (content.substring(1) == "0C C3 2E 02")) {
         Serial.println("num:19");
         delay(1000);
       }

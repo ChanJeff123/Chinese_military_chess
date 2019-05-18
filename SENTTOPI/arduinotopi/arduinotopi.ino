@@ -102,7 +102,7 @@ const int NRSTPD = 9;            //RST引脚
 uchar serNum[5];
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(19200);
   SPI.begin();
   pinMode(chipSelectPin, OUTPUT);       //设置数字引脚10作为输出连接到RFID/使能引脚
   digitalWrite(chipSelectPin, LOW);    //激活RFID阅读器（片选)
@@ -125,9 +125,9 @@ void loop()
       status = MFRC522_Anticoll(str);
       if (status == MI_OK)
       {
-        Serial.print("The card's number is: ");
+//        Serial.print("The card's number is: ");
         memcpy(serNum, str, 5);
-        ShowCardID(serNum);
+//        ShowCardID(serNum);
         uchar* id = serNum;
         if (id[0] == 0x9C && id[1] == 0x21 && id[2] == 0x2F && id[3] == 0x2) {
           Serial.println("num:1");
@@ -234,13 +234,13 @@ void loop()
         } else if (id[0] == 0xAC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
           Serial.println("num:18");
           delay(1000);
+        } else if (id[0] == 0x0C && id[1] == 0xC3 && id[2] == 0x2E && id[3] == 0x02) {
+          Serial.println("num:19");
+          delay(1000);
+        } else if (id[0] == 0xAC && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x02) {
+          Serial.println("num:19");
+          delay(1000);
         } else if (id[0] == 0x6C && id[1] == 0x0F && id[2] == 0x2F && id[3] == 0x2) {
-          Serial.println("num:19");
-          delay(1000);
-        } else if (id[0] == 0xAC && id[1] == 0x0B && id[2] == 0x2F && id[3] == 0x2) {
-          Serial.println("num:19");
-          delay(1000);
-        } else if (id[0] == 0xBC && id[1] == 0x2 && id[2] == 0x2F && id[3] == 0x2) {
           Serial.println("num:19");
           delay(1000);
         } else if (id[0] == 0xFC && id[1] == 0x22 && id[2] == 0x2F && id[3] == 0x2) {
@@ -437,15 +437,15 @@ void loop()
   }
 }
 
-void ShowCardID(uchar *id)
-{
-  int IDlen = 4;
-  for (int i = 0; i < IDlen; i++) {
-    Serial.print(0x0F & (id[i] >> 4), HEX);
-    Serial.print(0x0F & id[i], HEX);
-  }
-  Serial.println("");
-}
+//void ShowCardID(uchar *id)
+//{
+//  int IDlen = 4;
+//  for (int i = 0; i < IDlen; i++) {
+//    Serial.print(0x0F & (id[i] >> 4), HEX);
+//    Serial.print(0x0F & id[i], HEX);
+//  }
+//  Serial.println("");
+//}
 /*
    Function：Write_MFRC5200
    Description：写一个字节的数据到一个登记的MR RC522
