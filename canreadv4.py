@@ -3,7 +3,7 @@
 import time,pygame,string,sys,os,threading,SimpleMFRC522
 import RPi.GPIO as GPIO
 import serial
-ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=0.5)
+ser = serial.Serial('/dev/ttyUSB0', 19200, timeout=0.5)
 
 GPIO.setmode(GPIO.BOARD)
 reader = SimpleMFRC522.SimpleMFRC522()
@@ -99,11 +99,9 @@ def Arduino_one():
             b3=a-24#b3蓝方
         elif a>=37 and a < 49:
             b4=a-36#b4绿方
-        print ((a,b1) if(b1>0) else (a,b2))
         i+=1
         print "i=",i
         print "b1=",b1,"b2=",b2,"b3=",b3,"b4=",b4,"a=",a
-
 def OG_one():
     global b1
     global b2
@@ -121,7 +119,6 @@ def OG_one():
         b3=a-24#b3蓝方
     elif a>=37 and a < 49:
         b4=a-36#b4绿方
-    print ((a,b2) if(b2>0) else (a,b1))
     threading.Thread(target=Yled).start()
     threading.Thread(target=Music(fileTips)).start()
     i+=1
