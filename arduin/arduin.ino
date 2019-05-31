@@ -1,4 +1,11 @@
 #include <SPI.h>
+#include "FastLED.h"
+#define LED_DT 5
+#define COLOR_ORDER GRB
+#define LED_TYPE WS2812
+#define NUM_LEDS 5
+uint8_t max_bright = 60;                                      // Overall brightness definition. It can be changed on the fly.
+struct CRGB leds[NUM_LEDS];
 #define uchar unsigned char
 #define uint unsigned int
 #define MAX_LEN 16
@@ -107,53 +114,45 @@ int b3 = 0;
 int b4 = 0;
 void setup()
 {
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
   Serial.begin(19200);
   SPI.begin();
   pinMode(chipSelectPin, OUTPUT);       //设置数字引脚10作为输出连接到RFID/使能引脚
   digitalWrite(chipSelectPin, LOW);    //激活RFID阅读器（片选)
   pinMode(NRSTPD, OUTPUT);            //设置数字引脚9，不复位和断电（复位引脚)
   MFRC522_Init();
+  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.setBrightness(max_bright);
+  set_max_power_in_volts_and_milliamps(5, 500);
 }
 static void (*reset_this_CPU)(void) = 0x0000;
 void loop()
 {
-  //  a = 0;
-  //  int b1 = 0;
-  //  int b2 = 0;
-  //  int b3 = 0;
-  //  int b4 = 0;
-  //  delay(500);
-  //  if (Serial.available() > 0) {
   RFID();
-  //  Serial.print("a= ");
-  //  Serial.print(a);
-
   if (0 < a && a < 13) {
     b1 = a;
     Serial.print("b1=");
     Serial.println(b1);
+    led(10);
   }
   else if (12 < a && a < 25) {
     b2 = a - 12;
     Serial.print("b2=");
     Serial.println(b2);
+    led(10);
   }
   else if (24 < a && a < 37) {
     b3 = a - 24;
     Serial.print("b3=");
     Serial.println(b3);
+    led(10);
   }
   else if (36 < a && a < 49) {
     b4 = a - 36;
     Serial.print("b4=");
     Serial.println(b4);
+    led(10);
   }
   suanfa();
-  //  }
 }
 
 int RFID() {
@@ -548,13 +547,10 @@ int RFID() {
     } else if (id[0] == 0x6C && id[1] == 0xCA && id[2] == 0x2E && id[3] == 0x2) {
       a =  46;
       Serial.println("num:46");
-      //        Serial.println(a);
-      Serial.println("1");
       delay(1000);
     } else if (id[0] == 0x9C && id[1] == 0xCB && id[2] == 0x2E && id[3] == 0x2) {
       a =  46;
       Serial.println("num:46");
-
       delay(1000);
     } else if (id[0] == 0xCC && id[1] == 0xD7 && id[2] == 0x2E && id[3] == 0x2) {
       a =  46;
@@ -785,10 +781,25 @@ void suanfa() {
   }
 
 }
-void led(int LED_pin) {
-  digitalWrite(LED_pin, HIGH);
-  delay(500);
-  digitalWrite(LED_pin, LOW);
+void led(int C_case) {
+  if (C_case == 5) {
+    fill_solid(leds, NUM_LEDS, CRGB::Red);
+  } else if (C_case == 6) {
+    fill_solid(leds, NUM_LEDS, CRGB::Yellow);
+  } else if (C_case == 7) {
+    fill_solid(leds, NUM_LEDS, CRGB::Blue);
+  } else if (C_case == 8) {
+    fill_solid(leds, NUM_LEDS, CRGB::Green);
+  } else if (C_case == 9) {
+    fill_solid(leds, NUM_LEDS, CRGB::White);
+  } else if (C_case == 10) {
+    leds[0] = CRGB::White;
+  }
+  FastLED.show();
+  FastLED.delay(1000);
+  fill_solid(leds, NUM_LEDS, CRGB::Black);
+  FastLED.show();
+  FastLED.clear();
 }
 void B1_win() {
   led(5);
@@ -816,15 +827,7 @@ void B4_win() {
 }
 
 void NO_win() {
-  digitalWrite(5, HIGH);
-  digitalWrite(6, HIGH);
-  digitalWrite(7, HIGH);
-  digitalWrite(8, HIGH);
-  delay(500);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
-  digitalWrite(7, LOW);
-  digitalWrite(8, LOW);
+  led(9);
   Serial.println("NO one win!双发出局");
   delay(500);
   reset_this_CPU();
