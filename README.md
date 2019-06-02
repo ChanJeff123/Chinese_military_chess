@@ -52,13 +52,37 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 | 11 | 红方炸弹 | 23 | 黄方炸弹 |
 | 12 | 红方军旗 | 24 | 黄方军旗 |
 
+
 >python ezWrite.py
 
 读一下试试，结果是写入的数字
 >python ezRead.py
 
 然后就可以直接上核心代码啦！
->python repeatV5.py
+>python repeatV5.py  
+四国军棋以此类推。四国军棋可以  
+>python canreadv4.py  
+# 添加ARDUINO和nodemcu接线和代码  
+RFID与Arduino Uno的连线  
+SDA------------------------Digital 10  
+SCK------------------------Digital 13  
+MOSI----------------------Digital 11  
+MISO----------------------Digital 12  
+IRQ------------------------N/A  
+GND-----------------------GND  
+RST------------------------Digital 9  
+
+![arduino522](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/pic/arduino.png)  
+arduino部分添加ws2812 rgb彩灯，用FASTLED库。WS2812 data接arduino-nano引脚5  
+核心代码ARDUIN.INO  
+这里可能出现的问题不一定每个arduino都可以用很奇怪，所以我在NODEMCU代码里直接用RFID522的库  
+**NODEMCU部分**  
+![nodemcu引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/pic/NODEMCU%E5%BC%95%E8%84%9A.png)  
+先看NODEMCU的引脚与arduino有点不同默认是GPIO编号所以代码里的引脚说明要注意  
+6/7/8/9/10可以之家参照D6,D7...  
+这里的WS2812接D8【虽然我买的是5V的2812但是这里依然可以用nodemcu的3V口】  
+![nodemcu-522引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/pic/NODEMCU-RC522.png)  
+代码在arduino ide里进行编译，核心代码8266junqi.ino  
 
 Any question connect me.  
 ccwanyuan2014@163.com
