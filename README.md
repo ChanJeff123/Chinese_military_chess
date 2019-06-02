@@ -50,8 +50,8 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 | 9 | 红方工兵 | 21 | 黄方工兵 |
 | 10 | 红方地雷 | 22 | 黄方地雷 |
 | 11 | 红方炸弹 | 23 | 黄方炸弹 |
-| 12 | 红方军旗 | 24 | 黄方军旗 |
-
+| 12 | 红方军旗 | 24 | 黄方军旗 |  
+四国军棋以此类推。
 
 >python ezWrite.py
 
@@ -60,7 +60,9 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 
 然后就可以直接上核心代码啦！
 >python repeatV5.py  
-四国军棋以此类推。四国军棋可以  
+
+四国军棋可以  
+
 >python canreadv4.py  
 # 添加ARDUINO和nodemcu接线和代码  
 RFID与Arduino Uno的连线  
