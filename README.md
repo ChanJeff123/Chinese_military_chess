@@ -84,6 +84,8 @@ arduino部分添加ws2812 rgb彩灯，用FASTLED库。WS2812 data接arduino-nano
 6/7/8/9/10可以之家参照D6,D7...  
 这里的WS2812接D8【虽然我买的是5V的2812但是这里依然可以用nodemcu的3V口】  
 ![nodemcu-522引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/pic/NODEMCU-RC522.png)  
+![nodemcu-522引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/nodemcu.png)  
+
 代码在arduino ide里进行编译，核心代码8266junqi.ino  
 
 Any question connect me.  
