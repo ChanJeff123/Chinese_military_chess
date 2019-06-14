@@ -1,5 +1,6 @@
 #include <SPI.h>
 #include "FastLED.h"
+#include <SoftwareSerial.h>
 #define LED_DT 5
 #define COLOR_ORDER GRB
 #define LED_TYPE WS2812
@@ -112,6 +113,7 @@ int b1 = 0;
 int b2 = 0;
 int b3 = 0;
 int b4 = 0;
+
 void setup()
 {
   Serial.begin(19200);
@@ -802,24 +804,28 @@ void led(int C_case) {
   FastLED.clear();
 }
 void B1_win() {
+
   led(5);
   Serial.println("RED side win!红方胜");
   delay(500);
   reset_this_CPU();
 }
 void B2_win() {
+
   led(6);
   Serial.println("YELLOW side win!黄方胜");
   delay(500);
   reset_this_CPU();
 }
 void B3_win() {
+
   led(7);
   Serial.println("BLUE side win!蓝方胜");
   delay(500);
   reset_this_CPU();
 }
 void B4_win() {
+
   led(8);
   Serial.println("GREEN side win!绿方胜");
   delay(500);
@@ -827,6 +833,7 @@ void B4_win() {
 }
 
 void NO_win() {
+
   led(9);
   Serial.println("NO one win!双发出局");
   delay(500);
