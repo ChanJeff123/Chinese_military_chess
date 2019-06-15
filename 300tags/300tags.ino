@@ -41,14 +41,7 @@ void setup() {
 }
 
 void loop() {
-  //  // 寻找新卡
-  if ( ! mfrc522.PICC_IsNewCardPresent())
-    //    return;
-    ;
-  //
-  // 选择一张卡
-  if ( ! mfrc522.PICC_ReadCardSerial())
-    return;
+
   RFID();
   if (0 < a && a < 13) {
     b1 = a;
@@ -92,6 +85,15 @@ void volume( unsigned char vol)
   mySerial.write(volume, 5);
 }
 int RFID() {
+  //  // 寻找新卡
+  if ( ! mfrc522.PICC_IsNewCardPresent()) {
+    ;
+  }
+  // 选择一张卡
+  if ( ! mfrc522.PICC_ReadCardSerial())
+  {
+    ;
+  }
   //Show UID on serial monitor
   Serial.println();
   Serial.print(" UID tag :");
