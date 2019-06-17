@@ -23,6 +23,9 @@ int b1 = 0;
 int b2 = 0;
 int b3 = 0;
 int b4 = 0;
+MFRC522::MIFARE_Key key;
+// Init array that will store new NUID
+byte nuidPICC[3];
 
 void setup() {
   Serial.begin(115200);
@@ -30,9 +33,13 @@ void setup() {
   volume(0x1E);//音量设置0x00-0x1E
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
+  //  rfid.PCD_Init(); // Init MFRC522
   LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);
   FastLED.setBrightness(max_bright);
   set_max_power_in_volts_and_milliamps(5, 500);
+  for (byte i = 0; i < 6; i++) {
+    key.keyByte[i] = 0xFF;
+  }
 }
 
 void loop() {
@@ -74,36 +81,39 @@ void volume( unsigned char vol)
   unsigned char volume[5] = {0xAA, 0x13, 0x01, vol, vol + 0xBE}; //0xBE=0xAA+0x13+0x01,即最后一位为校验和
   mySerial.write(volume, 5);
 }
-int RFID() {
+void RFID() {
   // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent())
   {
-    ;
-    //    return;
+    //    ;
+    return;
   }
   // Select one of the cards
   if ( ! mfrc522.PICC_ReadCardSerial())
   {
-    ;
-    //    return;
+    //    ;
+    return;
   }
+  //  Serial.print(F("PICC type: "));
+  //  MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
+  //  Serial.println(rfid.PICC_GetTypeName(piccType));
   //Show UID on serial monitor
-  //  ////Serial.println();
-  //  //Serial.print(" UID tag :");
+  Serial.println();
+  Serial.print(" UID tag :");
   String content = "";
   byte letter;
   for (byte i = 0; i < mfrc522.uid.size; i++)
   {
-    //    //Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-    //    //Serial.print(mfrc522.uid.uidByte[i], HEX);
+    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+    Serial.print(mfrc522.uid.uidByte[i], HEX);
     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
     content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
   content.toUpperCase();
-  //  ////Serial.println();
+  Serial.println();
   if (content.substring(1) == "9C 21 2F 02")
   {
-    ////Serial.println("num:1");
+    Serial.println("num:1");
     a = 1;
     delay(500);
   }
