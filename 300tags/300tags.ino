@@ -95,8 +95,8 @@ int RFID() {
     ;
   }
   //Show UID on serial monitor
-  Serial.println();
-  Serial.print(" UID tag :");
+  //  Serial.println();
+  //  Serial.print(" UID tag :");
   String content = "";
   byte letter;
   for (byte i = 0; i < mfrc522.uid.size; i++)
@@ -106,7 +106,7 @@ int RFID() {
   }
 
   content.toUpperCase();
-  Serial.println();
+  //  Serial.println();
   if (content.substring(1) == "04 4C 7A 22 2C 5E 81") {
     Serial.println("num:1");
     a = 1;
