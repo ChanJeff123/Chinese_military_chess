@@ -37,20 +37,20 @@ auto chess judge in raspberry pi 3b+.Use mfrc522
 需要定制50个含IC芯片的军棋  
 对每个芯片卡写处理:  
 
-| 写入 | 代表 | 写入 | 代表 |
-| :------: | :------: | :------: | :------: |
-| 1 | 红方司令 | 13 | 黄方司令 |
-| 2 | 红方军长 | 14 | 黄方军长 |
-| 3 | 红方师长 | 15 | 黄方师长 |
-| 4 | 红方旅长 | 16 | 黄方旅长 |
-| 5 | 红方团长 | 17 | 黄方团长 |
-| 6 | 红方营长 | 18 | 黄方营长 |
-| 7 | 红方连长 | 19 | 黄方连长 |
-| 8 | 红方排长 | 20 | 黄方排长 |
-| 9 | 红方工兵 | 21 | 黄方工兵 |
-| 10 | 红方地雷 | 22 | 黄方地雷 |
-| 11 | 红方炸弹 | 23 | 黄方炸弹 |
-| 12 | 红方军旗 | 24 | 黄方军旗 |  
+| 写入  |   代表   | 写入  |   代表   |
+| :---: | :------: | :---: | :------: |
+|   1   | 红方司令 |  13   | 黄方司令 |
+|   2   | 红方军长 |  14   | 黄方军长 |
+|   3   | 红方师长 |  15   | 黄方师长 |
+|   4   | 红方旅长 |  16   | 黄方旅长 |
+|   5   | 红方团长 |  17   | 黄方团长 |
+|   6   | 红方营长 |  18   | 黄方营长 |
+|   7   | 红方连长 |  19   | 黄方连长 |
+|   8   | 红方排长 |  20   | 黄方排长 |
+|   9   | 红方工兵 |  21   | 黄方工兵 |
+|  10   | 红方地雷 |  22   | 黄方地雷 |
+|  11   | 红方炸弹 |  23   | 黄方炸弹 |
+|  12   | 红方军旗 |  24   | 黄方军旗 |
 四国军棋以此类推。
 
 >python ezWrite.py
@@ -84,7 +84,7 @@ arduino部分添加ws2812 rgb彩灯，用FASTLED库。WS2812 data接arduino-nano
 6/7/8/9/10可以之家参照D6,D7...  
 这里的WS2812接D8【虽然我买的是5V的2812但是这里依然可以用nodemcu的3V口】  
 ![nodemcu-522引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/pic/NODEMCU-RC522.png)  
-![nodemcu-522引脚](https://github.com/ChanJeff123/Chinese_military_chess/blob/master/nodemcu.png)  
+![nodemcu-522引脚](https://raw.githubusercontent.com/ChanJeff123/Chinese_military_chess/master/pic/nodemcu.png)  
 
 代码在arduino ide里进行编译，核心代码8266junqi.ino  
 
