@@ -1,6 +1,6 @@
 # Chinese_military_chess
 
-![军棋](https://github.com/ChanJeff123/ChanJeff123.github.io/blob/master/style/images/%E7%BB%93%E6%9E%9C.jpg?raw=true)
+![show](https://github.com/ChanJeff123/ChanJeff123.github.io/blob/master/thumbnails/junqi.gif?raw=true))
 
 先安装树莓派3B+的SPI接口支持库
 ------------------------------
