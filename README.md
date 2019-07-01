@@ -1,7 +1,6 @@
 # Chinese_military_chess
-auto chess judge in raspberry pi 3b+.Use mfrc522
-==========
-本项目适用于MFRC522模块基于树莓派的读写操作
+
+![军棋](https://github.com/ChanJeff123/ChanJeff123.github.io/blob/master/style/images/%E7%BB%93%E6%9E%9C.jpg?raw=true)
 
 先安装树莓派3B+的SPI接口支持库
 ------------------------------
