@@ -1,5 +1,5 @@
 #include <SPI.h>
-#include <SoftwareSerial.h>
+
 #include <MFRC522.h>
 #include "FastLED.h"
 
@@ -15,8 +15,6 @@ struct CRGB leds[NUM_LEDS];
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // 创建新的RFID实例
 MFRC522::MIFARE_Key key;
 
-SoftwareSerial mySerial(3, 1);//CONNECT WITH OTHER BOARD
-unsigned char order[4] = {0xAA, 0x06, 0x00, 0xB0};
 
 int a;
 int b1 = 0;
@@ -26,7 +24,6 @@ int b4 = 0;
 
 void setup() {
   Serial.begin(115200);// 设置串口波特率为115200
-  mySerial.begin(9600);
   while (!Serial);    // 如果串口没有打开，则死循环下去不进行下面的操作
   SPI.begin();        // SPI开始
   mfrc522.PCD_Init(); // Init MFRC522 card
@@ -37,7 +34,7 @@ void setup() {
   FastLED.setBrightness(max_bright);
   set_max_power_in_volts_and_milliamps(5, 500);
 
-  volume(0x1A);//音量设置0x00-0x1E
+
 }
 
 void loop() {
@@ -74,16 +71,7 @@ void loop() {
   //停止加密PCD
   //  mfrc522.PCD_StopCrypto1();
 }
-void play(unsigned char Track)
-{
-  unsigned char play[6] = {0xAA, 0x07, 0x02, 0x00, Track, Track + 0xB3}; //0xB3=0xAA+0x07+0x02+0x00,即最后一位为校验和
-  mySerial.write(play, 6);
-}
-void volume( unsigned char vol)
-{
-  unsigned char volume[5] = {0xAA, 0x13, 0x01, vol, vol + 0xBE}; //0xBE=0xAA+0x13+0x01,即最后一位为校验和
-  mySerial.write(volume, 5);
-}
+
 int RFID() {
   //  // 寻找新卡
   if ( ! mfrc522.PICC_IsNewCardPresent()) {
@@ -1839,31 +1827,25 @@ void led(int C_case) {
   FastLED.clear();
 }
 void B1_win() {
-  play(0x01);
-  delay(1500);
+
   led(5);
   Serial.println("RED side win!红方胜");
   ESP.restart();
 }
 void B2_win() {
-  play(0x02);
-  delay(1500);
+
   led(6);
   Serial.println("YELLOW side win!黄方胜");
 
   ESP.restart();
 }
 void B3_win() {
-  play(0x03);
-  delay(1500);
   led(7);
   Serial.println("BLUE side win!蓝方胜");
 
   ESP.restart();
 }
 void B4_win() {
-  play(0x04);
-  delay(1500);
   led(8);
   Serial.println("GREEN side win!绿方胜");
 
@@ -1871,8 +1853,6 @@ void B4_win() {
 }
 
 void NO_win() {
-  play(0x05);
-  delay(1500);
   led(9);
   Serial.println("NO one win!双发出局");
 
